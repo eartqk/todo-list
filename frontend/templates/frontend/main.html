@@ -103,8 +103,6 @@
         let activeItem = null
         let list_snapshot = []
 
-        buildList()
-
         function buildList() {
             let wrapper = document.getElementById('list-wrapper')
             let url = 'http://127.0.0.1:8000/api/task-list/'
@@ -133,10 +131,10 @@
                                 ${title}
                             </div>
                             <div style="flex:1">
-                                <button class="btn btn-sm btn-outline-primary">Edit</button>
+                                <button class="btn btn-sm btn-outline-primary edit">Edit</button>
                             </div>
                             <div style="flex:1">
-                                <button class="btn btn-sm btn-outline-dark">Delete</button>
+                                <button class="btn btn-sm btn-outline-dark delete">Delete</button>
                             </div>
                         </div>
                         `
@@ -156,27 +154,29 @@
                         let deleteBtn = document.getElementsByClassName('delete')[i]
                         let title = document.getElementsByClassName('title')[i]
 
-                        editBtn.addEventListener('click', (function (item) {
-                            return function () {
-                                editItem(item)
-                            }
-                        })(list[i]))
+                        editBtn.addEventListener('click', (function(item){
+						return function(){
+							editItem(item)
+						}
+					    })(list[i]))
 
-                        deleteBtn.addEventListener('click', (function (item) {
-                            return function () {
+                        deleteBtn.addEventListener('click', (function(item){
+                            return function(){
                                 deleteItem(item)
                             }
                         })(list[i]))
-
-                        title.addEventListener('click', (function (item) {
-                            return function () {
+					
+                        title.addEventListener('click', (function(item){
+                            return function(){
                                 strikeUnstrike(item)
                             }
                         })(list[i]))
+
                     }
                 })
         }
 
+        buildList()
 
         let form = document.getElementById('form-wrapper')
         form.addEventListener('submit', function (e) {
