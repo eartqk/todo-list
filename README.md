@@ -24,6 +24,11 @@ python -m venv env
 source env/bin/activate
 pip install -r requirements.txt
 ```
+Проведите миграцию
+```
+python manage.py makemigrations
+python manage.py migrate
+```
 Запустите
 ```
 python manage.py runserver
